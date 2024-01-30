@@ -89,19 +89,19 @@ export default class InformationSection
         // Options
         this.links.options = [
             {
-                href: 'https://twitter.com/bruno_simon/',
+                href: '',
                 labelTexture: this.resources.items.informationContactTwitterLabelTexture
             },
             {
-                href: 'https://github.com/brunosimon/',
+                href: 'https://github.com/WtecHtec',
                 labelTexture: this.resources.items.informationContactGithubLabelTexture
             },
             {
-                href: 'https://www.linkedin.com/in/simonbruno77/',
+                href: '',
                 labelTexture: this.resources.items.informationContactLinkedinLabelTexture
             },
             {
-                href: 'mailto:simon.bruno.77@gmail.com',
+                href: 'mailto:504105925@qq.com',
                 labelTexture: this.resources.items.informationContactMailLabelTexture
             }
         ]
@@ -115,29 +115,33 @@ export default class InformationSection
             item.x = this.x + this.links.x + this.links.distanceBetween * i
             item.y = this.y + this.links.y
             item.href = _option.href
-
+            
             // Create area
-            item.area = this.areas.add({
+            if (_option.href) {
+              
+              item.area = this.areas.add({
                 position: new THREE.Vector2(item.x, item.y),
                 halfExtents: new THREE.Vector2(this.links.halfExtents.x, this.links.halfExtents.y)
-            })
-            item.area.on('interact', () =>
-            {
-                window.open(_option.href, '_blank')
-            })
+              })
 
-            // Texture
-            item.texture = _option.labelTexture
-            item.texture.magFilter = THREE.NearestFilter
-            item.texture.minFilter = THREE.LinearFilter
+              item.area.on('interact', () =>
+              {
+                _option.href && window.open(_option.href, '_blank')
+              })
 
-            // Create label
-            item.labelMesh = new THREE.Mesh(this.links.labelGeometry, new THREE.MeshBasicMaterial({ wireframe: false, color: 0xffffff, alphaMap: _option.labelTexture, depthTest: true, depthWrite: false, transparent: true }))
-            item.labelMesh.position.x = item.x + this.links.labelWidth * 0.5 - this.links.halfExtents.x
-            item.labelMesh.position.y = item.y + this.links.labelOffset
-            item.labelMesh.matrixAutoUpdate = false
-            item.labelMesh.updateMatrix()
-            this.links.container.add(item.labelMesh)
+              // Texture
+              item.texture = _option.labelTexture
+              item.texture.magFilter = THREE.NearestFilter
+              item.texture.minFilter = THREE.LinearFilter
+
+              // Create label
+              item.labelMesh = new THREE.Mesh(this.links.labelGeometry, new THREE.MeshBasicMaterial({ wireframe: false, color: 0xffffff, alphaMap: _option.labelTexture, depthTest: true, depthWrite: false, transparent: true }))
+              item.labelMesh.position.x = item.x + this.links.labelWidth * 0.5 - this.links.halfExtents.x
+              item.labelMesh.position.y = item.y + this.links.labelOffset
+              item.labelMesh.matrixAutoUpdate = false
+              item.labelMesh.updateMatrix()
+              this.links.container.add(item.labelMesh)
+            }
 
             // Save
             this.links.items.push(item)

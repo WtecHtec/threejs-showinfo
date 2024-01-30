@@ -21,3 +21,13 @@ npm run build
 ```
 🥚 2021eggpvlzscw
 ```
+
+目录：
+
+ProjectsSection.js => 项目列表
+
+InformationSection.js => 联系方式
+
+src\models\information\static\activities.png  => 经历描述
+
+
