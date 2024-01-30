@@ -44,402 +44,403 @@ import projectsKepplerSlideASources from '../../../models/projects/keppler/slide
 import projectsKepplerSlideBSources from '../../../models/projects/keppler/slideB.jpg'
 import projectsKepplerSlideCSources from '../../../models/projects/keppler/slideC.jpg'
 
-export default class ProjectsSection
-{
-    constructor(_options)
-    {
-        // Options
-        this.time = _options.time
-        this.resources = _options.resources
-        this.camera = _options.camera
-        this.passes = _options.passes
-        this.objects = _options.objects
-        this.areas = _options.areas
-        this.zones = _options.zones
-        this.tiles = _options.tiles
-        this.debug = _options.debug
-        this.x = _options.x
-        this.y = _options.y
 
-        // Debug
-        if(this.debug)
-        {
-            this.debugFolder = this.debug.addFolder('projects')
-            this.debugFolder.open()
-        }
+import projectsJsDesignSlideASources from '../../../models/projects/jsdesign/icon-01.png'
+import projectsJsDesignSlideBSources from '../../../models/projects/jsdesign/icon-02.png'
+import projectsJsDesignSlideCSources from '../../../models/projects/jsdesign/icon-03.png'
+import projectsJsDesignSlideDSources from '../../../models/projects/jsdesign/icon-04.png'
 
-        // Set up
-        this.items = []
 
-        this.interDistance = 24
-        this.positionRandomess = 5
-        this.projectHalfWidth = 9
+import projectsAutoChatSlideASources from '../../../models/projects/autochat/icon-01.png'
+import projectsAutoChatSlideBSources from '../../../models/projects/autochat/icon-02.png'
 
-        this.container = new THREE.Object3D()
-        this.container.matrixAutoUpdate = false
-        this.container.updateMatrix()
+import projectsLogicPickSlideASources from '../../../models/projects/logicpick/icon-01.png'
+import projectsLogicPickSlideBSources from '../../../models/projects/logicpick/icon-02.png'
 
-        this.setGeometries()
-        this.setMeshes()
-        this.setList()
-        this.setZone()
+export default class ProjectsSection {
+	constructor(_options) {
+		// Options
+		this.time = _options.time
+		this.resources = _options.resources
+		this.camera = _options.camera
+		this.passes = _options.passes
+		this.objects = _options.objects
+		this.areas = _options.areas
+		this.zones = _options.zones
+		this.tiles = _options.tiles
+		this.debug = _options.debug
+		this.x = _options.x
+		this.y = _options.y
 
-        // Add all project from the list
-        for(const _options of this.list)
-        {
-            this.add(_options)
-        }
-    }
+		// Debug
+		if (this.debug) {
+			this.debugFolder = this.debug.addFolder('projects')
+			this.debugFolder.open()
+		}
 
-    setGeometries()
-    {
-        this.geometries = {}
-        this.geometries.floor = new THREE.PlaneBufferGeometry(16, 8)
-    }
+		// Set up
+		this.items = []
 
-    setMeshes()
-    {
-        this.meshes = {}
+		this.interDistance = 24
+		this.positionRandomess = 5
+		this.projectHalfWidth = 9
 
-        // this.meshes.boardStructure = this.objects.getConvertedMesh(this.resources.items.projectsBoardStructure.scene.children, { floorShadowTexture: this.resources.items.projectsBoardStructureFloorShadowTexture })
-        this.resources.items.areaOpenTexture.magFilter = THREE.NearestFilter
-        this.resources.items.areaOpenTexture.minFilter = THREE.LinearFilter
-        this.meshes.boardPlane = this.resources.items.projectsBoardPlane.scene.children[0]
-        this.meshes.areaLabel = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 0.5), new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, color: 0xffffff, alphaMap: this.resources.items.areaOpenTexture }))
-        this.meshes.areaLabel.matrixAutoUpdate = false
-    }
+		this.container = new THREE.Object3D()
+		this.container.matrixAutoUpdate = false
+		this.container.updateMatrix()
 
-    setList()
-    {
-        this.list = [
-            {
-                name: '即时设计',
-                imageSources:
-                [
-                    projectsThreejsJourneySlideASources,
-                    // projectsThreejsJourneySlideBSources,
-                    // projectsThreejsJourneySlideCSources,
-                    // projectsThreejsJourneySlideDSources
-                ],
-                floorTexture: this.resources.items.projectsThreejsJourneyFloorTexture,
-                link:
-                {
-                    href: 'https://juejin.cn/',
-                    x: - 4.8,
-                    y: - 3,
-                    halfExtents:
-                    {
-                        x: 3.2,
-                        y: 1.5
-                    }
-                },
-                distinctions:
-                [
-                    // { type: 'fwa', x: 3.95, y: 4.15 }
-                ]
-            },
-            // {
-            //     name: 'Madbox',
-            //     imageSources:
-            //     [
-            //         projectsMadboxSlideASources,
-            //         projectsMadboxSlideBSources,
-            //         projectsMadboxSlideCSources
-            //     ],
-            //     floorTexture: this.resources.items.projectsMadboxFloorTexture,
-            //     link:
-            //     {
-            //         href: 'https://madbox.io',
-            //         x: - 4.8,
-            //         y: - 4,
-            //         halfExtents:
-            //         {
-            //             x: 3.2,
-            //             y: 1.5
-            //         }
-            //     },
-            //     distinctions:
-            //     [
-            //         { type: 'awwwards', x: 3.95, y: 4.15 },
-            //         { type: 'fwa', x: 5.6, y: 4.15 }
-            //     ]
-            // },
-            // {
-            //     name: 'Scout',
-            //     imageSources:
-            //     [
-            //         projectsScoutSlideASources,
-            //         projectsScoutSlideBSources,
-            //         projectsScoutSlideCSources
-            //     ],
-            //     floorTexture: this.resources.items.projectsScoutFloorTexture,
-            //     link:
-            //     {
-            //         href: 'https://fromscout.com',
-            //         x: - 4.8,
-            //         y: - 2,
-            //         halfExtents:
-            //         {
-            //             x: 3.2,
-            //             y: 1.5
-            //         }
-            //     },
-            //     distinctions:
-            //     [
-            //     ]
-            // },
-            // {
-            //     name: 'Chartogne Taillet',
-            //     imageSources:
-            //     [
-            //         projectsChartogneSlideASources,
-            //         projectsChartogneSlideBSources,
-            //         projectsChartogneSlideCSources
-            //     ],
-            //     floorTexture: this.resources.items.projectsChartogneFloorTexture,
-            //     link:
-            //     {
-            //         href: 'https://chartogne-taillet.com',
-            //         x: - 4.8,
-            //         y: - 3.3,
-            //         halfExtents:
-            //         {
-            //             x: 3.2,
-            //             y: 1.5
-            //         }
-            //     },
-            //     distinctions:
-            //     [
-            //         { type: 'awwwards', x: 3.95, y: 4.15 },
-            //         { type: 'fwa', x: 5.6, y: 4.15 },
-            //         { type: 'cssda', x: 7.2, y: 4.15 }
-            //     ]
-            // },
-            // {
-            //     name: 'Zenly',
-            //     imageSources:
-            //     [
-            //         projectsZenlySlideASources,
-            //         projectsZenlySlideBSources,
-            //         projectsZenlySlideCSources
-            //     ],
-            //     floorTexture: this.resources.items.projectsZenlyFloorTexture,
-            //     link:
-            //     {
-            //         href: 'https://zen.ly',
-            //         x: - 4.8,
-            //         y: - 4.2,
-            //         halfExtents:
-            //         {
-            //             x: 3.2,
-            //             y: 1.5
-            //         }
-            //     },
-            //     distinctions:
-            //     [
-            //         { type: 'awwwards', x: 3.95, y: 4.15 },
-            //         { type: 'fwa', x: 5.6, y: 4.15 },
-            //         { type: 'cssda', x: 7.2, y: 4.15 }
-            //     ]
-            // },
-            // {
-            //     name: 'priorHoldings',
-            //     imageSources:
-            //     [
-            //         projectsPriorHoldingsSlideASources,
-            //         projectsPriorHoldingsSlideBSources,
-            //         projectsPriorHoldingsSlideCSources
-            //     ],
-            //     floorTexture: this.resources.items.projectsPriorHoldingsFloorTexture,
-            //     link:
-            //     {
-            //         href: 'https://prior.co.jp/discover/',
-            //         x: - 4.8,
-            //         y: - 3,
-            //         halfExtents:
-            //         {
-            //             x: 3.2,
-            //             y: 1.5
-            //         }
-            //     },
-            //     distinctions:
-            //     [
-            //         { type: 'awwwards', x: 3.95, y: 4.15 },
-            //         { type: 'fwa', x: 5.6, y: 4.15 },
-            //         { type: 'cssda', x: 7.2, y: 4.15 }
-            //     ]
-            // },
-            // {
-            //     name: 'orano',
-            //     imageSources:
-            //     [
-            //         projectsOranoSlideASources,
-            //         projectsOranoSlideBSources,
-            //         projectsOranoSlideCSources
-            //     ],
-            //     floorTexture: this.resources.items.projectsOranoFloorTexture,
-            //     link:
-            //     {
-            //         href: 'https://orano.imm-g-prod.com/experience/innovation/en',
-            //         x: - 4.8,
-            //         y: - 3.4,
-            //         halfExtents:
-            //         {
-            //             x: 3.2,
-            //             y: 1.5
-            //         }
-            //     },
-            //     distinctions:
-            //     [
-            //         { type: 'awwwards', x: 3.95, y: 4.15 },
-            //         { type: 'fwa', x: 5.6, y: 4.15 },
-            //         { type: 'cssda', x: 7.2, y: 4.15 }
-            //     ]
-            // },
-            // {
-            //     name: 'citrixRedbull',
-            //     imageSources:
-            //     [
-            //         projectsCitrixRedbullSlideASources,
-            //         projectsCitrixRedbullSlideBSources,
-            //         projectsCitrixRedbullSlideCSources
-            //     ],
-            //     floorTexture: this.resources.items.projectsCitrixRedbullFloorTexture,
-            //     link:
-            //     {
-            //         href: 'https://thenewmobileworkforce.imm-g-prod.com/',
-            //         x: - 4.8,
-            //         y: - 4.4,
-            //         halfExtents:
-            //         {
-            //             x: 3.2,
-            //             y: 1.5
-            //         }
-            //     },
-            //     distinctions:
-            //     [
-            //         { type: 'awwwards', x: 3.95, y: 4.15 },
-            //         { type: 'fwa', x: 5.6, y: 4.15 },
-            //         { type: 'cssda', x: 7.2, y: 4.15 }
-            //     ]
-            // },
-            // // {
-            // //     name: 'gleecChat',
-            // //     imageSources:
-            // //     [
-            // //         projectsGleecChatSlideASources,
-            // //         projectsGleecChatSlideBSources,
-            // //         projectsGleecChatSlideCSources,
-            // //         projectsGleecChatSlideDSources
-            // //     ],
-            // //     floorTexture: this.resources.items.projectsGleecChatFloorTexture,
-            // //     link:
-            // //     {
-            // //         href: 'http://gleec.imm-g-prod.com',
-            // //         x: - 4.8,
-            // //         y: - 3.4,
-            // //         halfExtents:
-            // //         {
-            // //             x: 3.2,
-            // //             y: 1.5
-            // //         }
-            // //     },
-            // //     distinctions:
-            // //     [
-            // //         { type: 'awwwards', x: 3.95, y: 4.15 },
-            // //         { type: 'fwa', x: 5.6, y: 4.15 },
-            // //         { type: 'cssda', x: 7.2, y: 4.15 }
-            // //     ]
-            // // },
-            // {
-            //     name: 'keppler',
-            //     imageSources:
-            //     [
-            //         projectsKepplerSlideASources,
-            //         projectsKepplerSlideBSources,
-            //         projectsKepplerSlideCSources
-            //     ],
-            //     floorTexture: this.resources.items.projectsKepplerFloorTexture,
-            //     link:
-            //     {
-            //         href: 'https://brunosimon.github.io/keppler/',
-            //         x: 2.75,
-            //         y: - 1.1,
-            //         halfExtents:
-            //         {
-            //             x: 3.2,
-            //             y: 1.5
-            //         }
-            //     },
-            //     distinctions: []
-            // }
-        ]
-    }
+		this.setGeometries()
+		this.setMeshes()
+		this.setList()
+		this.setZone()
 
-    setZone()
-    {
-        const totalWidth = this.list.length * (this.interDistance / 2)
+		// Add all project from the list
+		for (const _options of this.list) {
+			this.add(_options)
+		}
+	}
 
-        const zone = this.zones.add({
-            position: { x: this.x + totalWidth - this.projectHalfWidth - 6, y: this.y },
-            halfExtents: { x: totalWidth, y: 12 },
-            data: { cameraAngle: 'projects' }
-        })
+	setGeometries() {
+		this.geometries = {}
+		this.geometries.floor = new THREE.PlaneBufferGeometry(16, 8)
+	}
 
-        zone.on('in', (_data) =>
-        {
-            this.camera.angle.set(_data.cameraAngle)
-            TweenLite.to(this.passes.horizontalBlurPass.material.uniforms.uStrength.value, 2, { x: 0 })
-            TweenLite.to(this.passes.verticalBlurPass.material.uniforms.uStrength.value, 2, { y: 0 })
-        })
+	setMeshes() {
+		this.meshes = {}
 
-        zone.on('out', () =>
-        {
-            this.camera.angle.set('default')
-            TweenLite.to(this.passes.horizontalBlurPass.material.uniforms.uStrength.value, 2, { x: this.passes.horizontalBlurPass.strength })
-            TweenLite.to(this.passes.verticalBlurPass.material.uniforms.uStrength.value, 2, { y: this.passes.verticalBlurPass.strength })
-        })
-    }
+		// this.meshes.boardStructure = this.objects.getConvertedMesh(this.resources.items.projectsBoardStructure.scene.children, { floorShadowTexture: this.resources.items.projectsBoardStructureFloorShadowTexture })
+		this.resources.items.areaOpenTexture.magFilter = THREE.NearestFilter
+		this.resources.items.areaOpenTexture.minFilter = THREE.LinearFilter
+		this.meshes.boardPlane = this.resources.items.projectsBoardPlane.scene.children[0]
+		this.meshes.areaLabel = new THREE.Mesh(new THREE.PlaneBufferGeometry(2, 0.5), new THREE.MeshBasicMaterial({ transparent: true, depthWrite: false, color: 0xffffff, alphaMap: this.resources.items.areaOpenTexture }))
+		this.meshes.areaLabel.matrixAutoUpdate = false
+	}
 
-    add(_options)
-    {
-        const x = this.x + this.items.length * this.interDistance
-        let y = this.y
-        if(this.items.length > 0)
-        {
-            y += (Math.random() - 0.5) * this.positionRandomess
-        }
+	setList() {
+		this.list = [
+			{
+				name: '即时设计',
+				imageSources:
+					[
+						projectsJsDesignSlideASources,
+						projectsJsDesignSlideBSources,
+						projectsJsDesignSlideCSources,
+						projectsJsDesignSlideDSources
+					],
+				floorTexture: this.resources.items.projectsJsDesignFloorTexture,
+				link:
+				{
+					href: 'https://js.design/community?category=personHome&id=6407e807c1bb4e25e60f1eb8',
+					x: - 4.8,
+					y: - 3,
+					halfExtents:
+					{
+						x: 3.2,
+						y: 1.5
+					}
+				},
+				distinctions:
+					[
+						// { type: 'fwa', x: 3.95, y: 4.15 }
+					]
+			},
+			{
+				name: '逻辑可视化爬虫',
+				imageSources:
+					[
+						projectsLogicPickSlideASources,
+						projectsLogicPickSlideBSources,
+					],
+				floorTexture: this.resources.items.projectsLogicPickFloorTexture,
 
-        // Create project
-        const project = new Project({
-            time: this.time,
-            resources: this.resources,
-            objects: this.objects,
-            areas: this.areas,
-            geometries: this.geometries,
-            meshes: this.meshes,
-            debug: this.debugFolder,
-            x: x,
-            y: y,
-            ..._options
-        })
+				link:
+				{
+					href: 'https://github.com/WtecHtec/electron-jest',
+					x: - 4.8,
+					y: - 4,
+					halfExtents:
+					{
+						x: 3.2,
+						y: 1.5
+					}
+				},
+				distinctions:
+					[
+						// { type: 'awwwards', x: 3.95, y: 4.15 },
+						// { type: 'fwa', x: 5.6, y: 4.15 }
+					]
+			},
+			{
+				name: '微信自动回复平台',
+				imageSources:
+					[
+						projectsAutoChatSlideASources,
+						projectsAutoChatSlideBSources,
+						// projectsMadboxSlideCSources
+					],
+				floorTexture: this.resources.items.projectsAutoChatFloorTexture,
 
-        this.container.add(project.container)
+				link:
+				{
+					href: 'https://sr7.top/auto_front/',
+					x: - 4.8,
+					y: - 2,
+					halfExtents:
+					{
+						x: 3.2,
+						y: 1.5
+					}
+				},
+				distinctions:
+					[
+					]
+			},
+			// {
+			//     name: 'Chartogne Taillet',
+			//     imageSources:
+			//     [
+			//         projectsChartogneSlideASources,
+			//         projectsChartogneSlideBSources,
+			//         projectsChartogneSlideCSources
+			//     ],
+			//     floorTexture: this.resources.items.projectsChartogneFloorTexture,
+			//     link:
+			//     {
+			//         href: 'https://chartogne-taillet.com',
+			//         x: - 4.8,
+			//         y: - 3.3,
+			//         halfExtents:
+			//         {
+			//             x: 3.2,
+			//             y: 1.5
+			//         }
+			//     },
+			//     distinctions:
+			//     [
+			//         { type: 'awwwards', x: 3.95, y: 4.15 },
+			//         { type: 'fwa', x: 5.6, y: 4.15 },
+			//         { type: 'cssda', x: 7.2, y: 4.15 }
+			//     ]
+			// },
+			// {
+			//     name: 'Zenly',
+			//     imageSources:
+			//     [
+			//         projectsZenlySlideASources,
+			//         projectsZenlySlideBSources,
+			//         projectsZenlySlideCSources
+			//     ],
+			//     floorTexture: this.resources.items.projectsZenlyFloorTexture,
+			//     link:
+			//     {
+			//         href: 'https://zen.ly',
+			//         x: - 4.8,
+			//         y: - 4.2,
+			//         halfExtents:
+			//         {
+			//             x: 3.2,
+			//             y: 1.5
+			//         }
+			//     },
+			//     distinctions:
+			//     [
+			//         { type: 'awwwards', x: 3.95, y: 4.15 },
+			//         { type: 'fwa', x: 5.6, y: 4.15 },
+			//         { type: 'cssda', x: 7.2, y: 4.15 }
+			//     ]
+			// },
+			// {
+			//     name: 'priorHoldings',
+			//     imageSources:
+			//     [
+			//         projectsPriorHoldingsSlideASources,
+			//         projectsPriorHoldingsSlideBSources,
+			//         projectsPriorHoldingsSlideCSources
+			//     ],
+			//     floorTexture: this.resources.items.projectsPriorHoldingsFloorTexture,
+			//     link:
+			//     {
+			//         href: 'https://prior.co.jp/discover/',
+			//         x: - 4.8,
+			//         y: - 3,
+			//         halfExtents:
+			//         {
+			//             x: 3.2,
+			//             y: 1.5
+			//         }
+			//     },
+			//     distinctions:
+			//     [
+			//         { type: 'awwwards', x: 3.95, y: 4.15 },
+			//         { type: 'fwa', x: 5.6, y: 4.15 },
+			//         { type: 'cssda', x: 7.2, y: 4.15 }
+			//     ]
+			// },
+			// {
+			//     name: 'orano',
+			//     imageSources:
+			//     [
+			//         projectsOranoSlideASources,
+			//         projectsOranoSlideBSources,
+			//         projectsOranoSlideCSources
+			//     ],
+			//     floorTexture: this.resources.items.projectsOranoFloorTexture,
+			//     link:
+			//     {
+			//         href: 'https://orano.imm-g-prod.com/experience/innovation/en',
+			//         x: - 4.8,
+			//         y: - 3.4,
+			//         halfExtents:
+			//         {
+			//             x: 3.2,
+			//             y: 1.5
+			//         }
+			//     },
+			//     distinctions:
+			//     [
+			//         { type: 'awwwards', x: 3.95, y: 4.15 },
+			//         { type: 'fwa', x: 5.6, y: 4.15 },
+			//         { type: 'cssda', x: 7.2, y: 4.15 }
+			//     ]
+			// },
+			// {
+			//     name: 'citrixRedbull',
+			//     imageSources:
+			//     [
+			//         projectsCitrixRedbullSlideASources,
+			//         projectsCitrixRedbullSlideBSources,
+			//         projectsCitrixRedbullSlideCSources
+			//     ],
+			//     floorTexture: this.resources.items.projectsCitrixRedbullFloorTexture,
+			//     link:
+			//     {
+			//         href: 'https://thenewmobileworkforce.imm-g-prod.com/',
+			//         x: - 4.8,
+			//         y: - 4.4,
+			//         halfExtents:
+			//         {
+			//             x: 3.2,
+			//             y: 1.5
+			//         }
+			//     },
+			//     distinctions:
+			//     [
+			//         { type: 'awwwards', x: 3.95, y: 4.15 },
+			//         { type: 'fwa', x: 5.6, y: 4.15 },
+			//         { type: 'cssda', x: 7.2, y: 4.15 }
+			//     ]
+			// },
+			// // {
+			// //     name: 'gleecChat',
+			// //     imageSources:
+			// //     [
+			// //         projectsGleecChatSlideASources,
+			// //         projectsGleecChatSlideBSources,
+			// //         projectsGleecChatSlideCSources,
+			// //         projectsGleecChatSlideDSources
+			// //     ],
+			// //     floorTexture: this.resources.items.projectsGleecChatFloorTexture,
+			// //     link:
+			// //     {
+			// //         href: 'http://gleec.imm-g-prod.com',
+			// //         x: - 4.8,
+			// //         y: - 3.4,
+			// //         halfExtents:
+			// //         {
+			// //             x: 3.2,
+			// //             y: 1.5
+			// //         }
+			// //     },
+			// //     distinctions:
+			// //     [
+			// //         { type: 'awwwards', x: 3.95, y: 4.15 },
+			// //         { type: 'fwa', x: 5.6, y: 4.15 },
+			// //         { type: 'cssda', x: 7.2, y: 4.15 }
+			// //     ]
+			// // },
+			// {
+			//     name: 'keppler',
+			//     imageSources:
+			//     [
+			//         projectsKepplerSlideASources,
+			//         projectsKepplerSlideBSources,
+			//         projectsKepplerSlideCSources
+			//     ],
+			//     floorTexture: this.resources.items.projectsKepplerFloorTexture,
+			//     link:
+			//     {
+			//         href: 'https://brunosimon.github.io/keppler/',
+			//         x: 2.75,
+			//         y: - 1.1,
+			//         halfExtents:
+			//         {
+			//             x: 3.2,
+			//             y: 1.5
+			//         }
+			//     },
+			//     distinctions: []
+			// }
+		]
+	}
 
-        // Add tiles
-        if(this.items.length >= 1)
-        {
-            const previousProject = this.items[this.items.length - 1]
-            const start = new THREE.Vector2(previousProject.x + this.projectHalfWidth, previousProject.y)
-            const end = new THREE.Vector2(project.x - this.projectHalfWidth, project.y)
-            const delta = end.clone().sub(start)
-            this.tiles.add({
-                start: start,
-                delta: delta
-            })
-        }
+	setZone() {
+		const totalWidth = this.list.length * (this.interDistance / 2)
 
-        // Save
-        this.items.push(project)
-    }
+		const zone = this.zones.add({
+			position: { x: this.x + totalWidth - this.projectHalfWidth - 6, y: this.y },
+			halfExtents: { x: totalWidth, y: 12 },
+			data: { cameraAngle: 'projects' }
+		})
+
+		zone.on('in', (_data) => {
+			this.camera.angle.set(_data.cameraAngle)
+			TweenLite.to(this.passes.horizontalBlurPass.material.uniforms.uStrength.value, 2, { x: 0 })
+			TweenLite.to(this.passes.verticalBlurPass.material.uniforms.uStrength.value, 2, { y: 0 })
+		})
+
+		zone.on('out', () => {
+			this.camera.angle.set('default')
+			TweenLite.to(this.passes.horizontalBlurPass.material.uniforms.uStrength.value, 2, { x: this.passes.horizontalBlurPass.strength })
+			TweenLite.to(this.passes.verticalBlurPass.material.uniforms.uStrength.value, 2, { y: this.passes.verticalBlurPass.strength })
+		})
+	}
+
+	add(_options) {
+		const x = this.x + this.items.length * this.interDistance
+		let y = this.y
+		if (this.items.length > 0) {
+			y += (Math.random() - 0.5) * this.positionRandomess
+		}
+
+		// Create project
+		const project = new Project({
+			time: this.time,
+			resources: this.resources,
+			objects: this.objects,
+			areas: this.areas,
+			geometries: this.geometries,
+			meshes: this.meshes,
+			debug: this.debugFolder,
+			x: x,
+			y: y,
+			..._options
+		})
+
+		this.container.add(project.container)
+
+		// Add tiles
+		if (this.items.length >= 1) {
+			const previousProject = this.items[this.items.length - 1]
+			const start = new THREE.Vector2(previousProject.x + this.projectHalfWidth, previousProject.y)
+			const end = new THREE.Vector2(project.x - this.projectHalfWidth, project.y)
+			const delta = end.clone().sub(start)
+			this.tiles.add({
+				start: start,
+				delta: delta
+			})
+		}
+
+		// Save
+		this.items.push(project)
+	}
 }
