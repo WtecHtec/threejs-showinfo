@@ -1,49 +1,114 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <title>Bruno Simon</title>
-    <meta name="description" content="Creative developer living in Paris, freelancer, former lead developer at Immersive Garden, former developer at Uzik and teacher." />
+  <title>虚惊一场。</title>
+  <meta name="description"
+    content="Creative developer living in Paris, freelancer, former lead developer at Immersive Garden, former developer at Uzik and teacher." />
 
-    <meta itemprop=name content="Bruno Simon - Creative developer">
-    <meta itemprop="description" content="Creative developer living in Paris, freelancer, former lead developer at Immersive Garden, former developer at Uzik and teacher.">
-    <meta itemprop="image" content=https://bruno-simon.com/social/share-1200x630.png>
+  <meta itemprop=name content="WtecHtec - Creative developer">
+  <meta itemprop="description"
+    content="Creative developer living in Paris, freelancer, former lead developer at Immersive Garden, former developer at Uzik and teacher.">
+  <meta itemprop="image" content=https://bruno-simon.com/social/share-1200x630.png>
 
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Bruno Simon - Creative developer">
-    <meta name="twitter:description" content="Creative developer living in Paris, freelancer, former lead developer at Immersive Garden, former developer at Uzik and teacher.">
-    <meta name="twitter:image" content="https://bruno-simon.com/social/share-1200x600.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WtecHtec - Creative developer">
+  <meta name="twitter:description"
+    content="Creative developer living in Paris, freelancer, former lead developer at Immersive Garden, former developer at Uzik and teacher.">
+  <meta name="twitter:image" content="https://bruno-simon.com/social/share-1200x600.png">
 
-    <meta property="og:site_name" content="Bruno Simon - Creative developer">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bruno-simon.com">
-    <meta property="og:title" content="Bruno Simon - Creative developer">
-    <meta property="og:description" content="Creative developer living in Paris, freelancer, former lead developer at Immersive Garden, former developer at Uzik and teacher.">
-    <meta property="og:image" content="https://bruno-simon.com/social/share-1200x630.png">
+  <meta property="og:site_name" content="Bruno Simon - Creative developer">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://github.com/WtecHtec">
+  <meta property="og:title" content="WtecHtec - Creative developer">
+  <meta property="og:description"
+    content="Creative developer living in Paris, freelancer, former lead developer at Immersive Garden, former developer at Uzik and teacher.">
+  <meta property="og:image" content="https://bruno-simon.com/social/share-1200x630.png">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#ff8908">
-    <meta name="apple-mobile-web-app-title" content="Bruno Simon">
-    <meta name="application-name" content="Bruno Simon">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=block" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#ff8908">
+  <meta name="apple-mobile-web-app-title" content="Bruno Simon">
+  <meta name="application-name" content="Bruno Simon">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=block" rel="stylesheet">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+   
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: fixed;
+      z-index: 99999;
+      background-color: #f0f0f0;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+
+    h1 {
+      color: #333;
+      animation: changeColor 3s infinite;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    @keyframes changeColor {
+      0% {
+        color: #333;
+      }
+
+      50% {
+        color: #666;
+      }
+
+      100% {
+        color: #333;
+      }
+    }
+
+    button a {
+      color: #fff;
+      text-decoration: none
+    }
+  </style>
 </head>
+
 <body>
+  <div id="container" class="container" style="display: none;">
+    <h1>在电脑浏览器打开，体验感更加好</h1>
+  </div>
+  <canvas class="canvas js-canvas"></canvas>
 
-    <canvas class="canvas js-canvas"></canvas>
-
-    <!-- <div class="threejs-journey is-hover-none js-threejs-journey">
+  <!-- <div class="threejs-journey is-hover-none js-threejs-journey">
         <div class="message js-message">
             <div class="boy">
                 <div class="variant is-hi">
@@ -84,13 +149,21 @@
         </div>
     </div> -->
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3966601-5"></script>
-    <script>
-        window.dataLayer = window.dataLayer || []
-        function gtag(){dataLayer.push(arguments)}
-        gtag('js', new Date())
-        gtag('config', 'UA-3966601-5')
-    </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3966601-5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || []
+    function gtag() { dataLayer.push(arguments) }
+    gtag('js', new Date())
+    gtag('config', 'UA-3966601-5')
+
+    if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+      // 当前设备是移动设备
+      const tipDom = document.getElementById('container')
+      tipDom.style.display = 'flex'
+    }
+
+  </script>
 
 </body>
+
 </html>

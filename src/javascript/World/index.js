@@ -234,6 +234,8 @@ export default class
         // On interact, reveal
         this.startingScreen.area.on('interact', () =>
         {
+
+          console.log('interact----')
             this.startingScreen.area.deactivate()
             TweenLite.to(this.startingScreen.area.floorBorder.material.uniforms.uProgress, 0.3, { value: 0, delay: 0.4 })
 
